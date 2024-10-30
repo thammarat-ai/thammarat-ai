@@ -25,4 +25,4 @@
 
 <p><img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=thammarat-ai&" alt="thammarat-ai" /></p>
 
-<img align="right" alt="Shinjung" width="200" src="https://media.tenor.com/e88HTLkfr_UAAAAj/smile.gif">
+[<img align="right" alt="Shinjung" width="200" src="[https://media.tenor.com/e88HTLkfr_UAAAAj/smile.gif](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmxvdTRwcjV2czEyZWs1MXJ6dWptOG16cHo5enc0dGNhb3J6bXRsNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/7kn27lnYSAE9O/giphy.gif)">](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmxvdTRwcjV2czEyZWs1MXJ6dWptOG16cHo5enc0dGNhb3J6bXRsNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/7kn27lnYSAE9O/giphy.gif)
