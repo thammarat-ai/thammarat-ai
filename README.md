@@ -27,4 +27,4 @@
 
 
 
-<div style="width:100%;height:0;padding-bottom:78%;position:relative;"><iframe src="https://giphy.com/embed/7kn27lnYSAE9O" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/running-muppets-7kn27lnYSAE9O">via GIPHY</a></p>
+
