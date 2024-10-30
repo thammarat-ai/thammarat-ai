@@ -29,3 +29,4 @@
 <img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmxvdTRwcjV2czEyZWs1MXJ6dWptOG16cHo5enc0dGNhb3J6bXRsNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/7kn27lnYSAE9O/giphy.gif">
 
 
+[![Harlok's WakaTime stats](https://github-readme-stats.vercel.app/api/wakatime?username=thammarat-ai)](https://github.com/anuraghazra/github-readme-stats)
