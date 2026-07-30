@@ -6,7 +6,6 @@ on:
   workflow_dispatch:
 
 env:
-  # บังคับให้ Actions รันบน Node.js 24 ตามข้อแนะนำอย่างเป็นทางการ
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
 
 jobs:
@@ -23,7 +22,7 @@ jobs:
           import re
 
           url = 'https://raw.githubusercontent.com/gayanvoice/top-github-users/main/markdown/public_contributions/thailand.md'
-          target_user = 'thammarat-ai'
+          keywords = ['thammarat-ai', 'thammarat thamma']
 
           try:
               req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
@@ -31,22 +30,31 @@ jobs:
                   content = response.read().decode('utf-8')
               
               rank = None
+              matched_line = ''
               for line in content.splitlines():
-                  if target_user.lower() in line.lower():
+                  # เช็กว่ามี username หรือ Display Name อยู่ในบรรทัดนั้นหรือไม่
+                  if any(kw in line.lower() for kw in keywords):
+                      matched_line = line
+                      # สกัดเอาอันดับ (ตัวเลขในคอลัมน์แรกของตาราง Markdown)
                       match = re.search(r'\|\s*(\d+)\s*\|', line)
                       if match:
                           rank = match.group(1)
                           break
 
+              print(f'Matched Line: {matched_line}')
+
               if rank:
+                  print(f'==> SUCCESS: Found Rank #{rank}')
                   badge = f'[![Thailand GitHub Rank](https://img.shields.io/badge/Thailand_Rank-%23{rank}_Public_Contributions-2E90FA?style=for-the-badge&logo=github&logoColor=white)](https://github.com/gayanvoice/top-github-users/blob/main/markdown/public_contributions/thailand.md)'
-                  print(f'Successfully found rank: #{rank}')
               else:
+                  print('==> WARNING: User not found in thailand.md list! Using fallback badge.')
                   badge = '[![Thailand GitHub Rank](https://img.shields.io/badge/Thailand_Rank-Top_GitHub_Users-2E90FA?style=for-the-badge&logo=github&logoColor=white)](https://github.com/gayanvoice/top-github-users/blob/main/markdown/public_contributions/thailand.md)'
-                  print('User not found in list, fallback used.')
 
               with open('README.md', 'r', encoding='utf-8') as f:
                   readme = f.read()
+
+              if '<!-- RANK:START -->' not in readme:
+                  print('==> ERROR: <!-- RANK:START --> tag NOT found in README.md!')
 
               pattern = r'<!-- RANK:START -->.*?<!-- RANK:END -->'
               replacement = f'<!-- RANK:START -->\n{badge}\n<!-- RANK:END -->'
