@@ -6,22 +6,18 @@ on:
   workflow_dispatch:
 
 env:
-  # บังคับใช้ Node 24 ตามมาตรฐานใหม่ของ GitHub Actions
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
+  # อนุญาตให้ Javascript Actions รันบน Node 20 runtime เพื่อปิด Warning
+  ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: 'true'
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE20: 'true'
 
 jobs:
   update-rank:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      - name: Fetch and Update Rank
+      - name: Fetch and Update Rank using Native Python
         run: |
           python3 -c "
           import urllib.request
@@ -37,9 +33,8 @@ jobs:
               
               rank = None
               for line in content.splitlines():
-                  # สแกนหาบรรทัดที่มี username
                   if target_user.lower() in line.lower():
-                      # สกัดเอาตัวเลขแรกสุดในบรรทัดตาราง Markdown (| 1 | หรือ | 45 |)
+                      # สกัดตัวเลขแรกสุดในคอลัมน์ตาราง Markdown (| 1 | หรือ | 45 |)
                       match = re.search(r'\|\s*(\d+)\s*\|', line)
                       if match:
                           rank = match.group(1)
