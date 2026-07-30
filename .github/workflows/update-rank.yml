@@ -2,8 +2,8 @@ name: Update Thailand GitHub Rank
 
 on:
   schedule:
-    - cron: '0 0 * * *' # รันดึงอันดับอัตโนมัติทุกเที่ยงคืน
-  workflow_dispatch: # ปุ่มกดสั่งรันเองแบบ Manual
+    - cron: '0 0 * * *'
+  workflow_dispatch:
 
 jobs:
   update-rank:
@@ -12,42 +12,49 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Fetch Rank from gayanvoice/top-github-users (public_contributions)
-        id: fetch-rank
-        run: |
-          # โหลดไฟล์ public_contributions/thailand.md
-          curl -s https://raw.githubusercontent.com/gayanvoice/top-github-users/main/markdown/public_contributions/thailand.md > thailand.md
-          
-          # สแกนหาบรรทัดที่มี thammarat-ai
-          RANK_LINE=$(grep -i "thammarat-ai" thailand.md || echo "")
-          
-          if [ -n "$RANK_LINE" ]; then
-            # สกัดเอาเฉพาะตัวเลขตัวแรกสุดจากบรรทัดนั้น (ซึ่งก็คือตัวเลขอันดับ)
-            RANK=$(echo "$RANK_LINE" | sed -E 's/^[^0-9]*([0-9]+).*/\1/')
-            echo "Found Rank: $RANK"
-            BADGE="[![Thailand GitHub Rank](https://img.shields.io/badge/Thailand_Rank-%23${RANK}_Public_Contributions-2E90FA?style=for-the-badge&logo=github&logoColor=white)](https://github.com/gayanvoice/top-github-users/blob/main/markdown/public_contributions/thailand.md)"
-          else
-            echo "User not found, fallback badge used"
-            BADGE="[![Thailand GitHub Rank](https://img.shields.io/badge/Thailand_Rank-Top_GitHub_Users-2E90FA?style=for-the-badge&logo=github&logoColor=white)](https://github.com/gayanvoice/top-github-users/blob/main/markdown/public_contributions/thailand.md)"
-          fi
-          
-          echo "BADGE_MD=$BADGE" >> $GITHUB_ENV
-
-      - name: Update README.md
+      - name: Fetch and Update Rank
         run: |
           python3 -c "
-          import re, os
-          badge = os.environ['BADGE_MD']
-          with open('README.md', 'r') as f:
-              content = f.read()
-          new_content = re.sub(
-              r'<!-- RANK:START -->.*?<!-- RANK:END -->',
-              f'<!-- RANK:START -->\n{badge}\n<!-- RANK:END -->',
-              content,
-              flags=re.DOTALL
-          )
-          with open('README.md', 'w') as f:
-              f.write(new_content)
+          import urllib.request
+          import re
+
+          url = 'https://raw.githubusercontent.com/gayanvoice/top-github-users/main/markdown/public_contributions/thailand.md'
+          username = 'thammarat-ai'
+
+          try:
+              req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+              with urllib.request.urlopen(req) as response:
+                  content = response.read().decode('utf-8')
+              
+              rank = None
+              for line in content.split('\n'):
+                  if username.lower() in line.lower():
+                      # หาตัวเลขแรกสุดในบรรทัดนั้น (อันดับ)
+                      match = re.search(r'\d+', line)
+                      if match:
+                          rank = match.group(0)
+                          break
+
+              if rank:
+                  badge = f'[![Thailand GitHub Rank](https://img.shields.io/badge/Thailand_Rank-%23{rank}_Public_Contributions-2E90FA?style=for-the-badge&logo=github&logoColor=white)](https://github.com/gayanvoice/top-github-users/blob/main/markdown/public_contributions/thailand.md)'
+              else:
+                  badge = '[![Thailand GitHub Rank](https://img.shields.io/badge/Thailand_Rank-Top_GitHub_Users-2E90FA?style=for-the-badge&logo=github&logoColor=white)](https://github.com/gayanvoice/top-github-users/blob/main/markdown/public_contributions/thailand.md)'
+
+              with open('README.md', 'r', encoding='utf-8') as f:
+                  readme = f.read()
+
+              # Replace ระหว่าง comment tags
+              pattern = r'<!-- RANK:START -->.*?<!-- RANK:END -->'
+              replacement = f'<!-- RANK:START -->\n{badge}\n<!-- RANK:END -->'
+              new_readme = re.sub(pattern, replacement, readme, flags=re.DOTALL)
+
+              with open('README.md', 'w', encoding='utf-8') as f:
+                  f.write(new_readme)
+
+              print(f'Successfully updated rank badge! Rank: {rank}')
+
+          except Exception as e:
+              print(f'Error occurred: {e}')
           "
 
       - name: Commit and Push Changes
