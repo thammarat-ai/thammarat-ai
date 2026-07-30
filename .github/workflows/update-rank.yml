@@ -5,6 +5,10 @@ on:
     - cron: '0 0 * * *'
   workflow_dispatch:
 
+env:
+  # บังคับใช้ Node 24 ตามมาตรฐานใหม่ของ GitHub Actions
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
+
 jobs:
   update-rank:
     runs-on: ubuntu-latest
@@ -33,9 +37,9 @@ jobs:
               
               rank = None
               for line in content.splitlines():
-                  # ตรวจหาบรรทัดตารางที่มี username
+                  # สแกนหาบรรทัดที่มี username
                   if target_user.lower() in line.lower():
-                      # สกัดตัวเลขแรกสุดในคอลัมน์ตาราง Markdown (| 45 | ...)
+                      # สกัดเอาตัวเลขแรกสุดในบรรทัดตาราง Markdown (| 1 | หรือ | 45 |)
                       match = re.search(r'\|\s*(\d+)\s*\|', line)
                       if match:
                           rank = match.group(1)
