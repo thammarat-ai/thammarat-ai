@@ -6,10 +6,10 @@
 
 <br/>
 
-<!-- Dynamic Thailand GitHub Rank SVG (committers.top) -->
-<a href="https://committers.top/thailand">
-  <img src="https://user-badge.committers.top/thailand/thammarat-ai.svg" alt="Thailand GitHub Rank" height="40" />
-</a>
+<!-- RANK:START -->
+<!-- GitHub Action จะมาเขียน Badge อันดับจาก gayanvoice ใส่ตรงนี้ให้อัตโนมัติ -->
+[![Thailand GitHub Rank](https://img.shields.io/badge/Thailand_Rank-(Fetching...)-2E90FA?style=for-the-badge&logo=github&logoColor=white)](https://github.com/gayanvoice/top-github-users/blob/main/markdown/total_contributions/thailand.md)
+<!-- RANK:END -->
 
 <br/><br/>
 
@@ -36,7 +36,7 @@
 
 ## 🏆 Achievements & Recognitions
 
-* 🇹🇭 **Top GitHub Developer in Thailand:** Dynamically ranked on [committers.top Thailand](https://committers.top/thailand) & tracked via public contributions
+* 🇹🇭 **Top GitHub Developer in Thailand:** Dynamically tracked via [gayanvoice/top-github-users](https://github.com/gayanvoice/top-github-users/blob/main/markdown/total_contributions/thailand.md) (Total Contributions)
 * 🎓 **Academic & Research Impact:** Computer Science & Geoinformatics Lecturer supervising software engineering & cloud infrastructure programs
 
 ---
