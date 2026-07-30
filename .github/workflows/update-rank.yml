@@ -30,24 +30,22 @@ jobs:
                   content = response.read().decode('utf-8')
               
               rank = None
-              for line in content.splitlines():
-                  # ค้นหาบรรทัดที่มี thammarat-ai
-                  if target_user.lower() in line.lower():
-                      # ตาราง Markdown จะมีรูปแบบ | 123 | [thammarat-ai]...
-                      # ดึงตัวเลขแรกที่อยู่หลังเครื่องหมาย pipe |
-                      parts = [p.strip() for p in line.split('|')]
-                      for part in parts:
-                          if part.isdigit():
-                              rank = part
-                              break
-                      if rank:
+              # แยกเนื้อหาเป็นแต่ละแถว <tr>...</tr>
+              rows = re.findall(r'<tr>(.*?)</tr>', content, re.DOTALL)
+              
+              for row in rows:
+                  if target_user.lower() in row.lower():
+                      # ดึงเนื้อหาภายใน <td> ตัวแรกสุดของแถวนั้น
+                      match = re.search(r'<td>\s*(\d+)\s*</td>', row)
+                      if match:
+                          rank = match.group(1)
                           break
 
               if rank:
                   print(f'==> SUCCESS: Found Rank #{rank}')
                   badge = f'[![Thailand GitHub Rank](https://img.shields.io/badge/Thailand_Rank-%23{rank}_Public_Contributions-2E90FA?style=for-the-badge&logo=github&logoColor=white)](https://github.com/gayanvoice/top-github-users/blob/main/markdown/public_contributions/thailand.md)'
               else:
-                  print('==> WARNING: User not found in thailand.md list!')
+                  print('==> WARNING: User not found in HTML table!')
                   badge = '[![Thailand GitHub Rank](https://img.shields.io/badge/Thailand_Rank-Top_GitHub_Users-2E90FA?style=for-the-badge&logo=github&logoColor=white)](https://github.com/gayanvoice/top-github-users/blob/main/markdown/public_contributions/thailand.md)'
 
               with open('README.md', 'r', encoding='utf-8') as f:
