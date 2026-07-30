@@ -6,9 +6,8 @@ on:
   workflow_dispatch:
 
 env:
-  # อนุญาตให้ Javascript Actions รันบน Node 20 runtime เพื่อปิด Warning
-  ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: 'true'
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE20: 'true'
+  # บังคับให้ Actions รันบน Node.js 24 ตามข้อแนะนำอย่างเป็นทางการ
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
 
 jobs:
   update-rank:
@@ -34,7 +33,6 @@ jobs:
               rank = None
               for line in content.splitlines():
                   if target_user.lower() in line.lower():
-                      # สกัดตัวเลขแรกสุดในคอลัมน์ตาราง Markdown (| 1 | หรือ | 45 |)
                       match = re.search(r'\|\s*(\d+)\s*\|', line)
                       if match:
                           rank = match.group(1)
