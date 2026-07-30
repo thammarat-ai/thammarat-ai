@@ -7,7 +7,7 @@
 <br/>
 
 <!-- RANK:START -->
-[![Thailand GitHub Rank](https://img.shields.io/badge/Thailand_Rank-%23_Public_Contributions-2E90FA?style=for-the-badge&logo=github&logoColor=white)](https://github.com/gayanvoice/top-github-users/blob/main/markdown/public_contributions/thailand.md)
+[![Thailand GitHub Rank](https://img.shields.io/badge/Thailand_Rank-%23			<a href="https://github.com/thammarat-ai">
 <!-- RANK:END -->
 
 <br/><br/>
