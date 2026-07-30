@@ -1,0 +1,58 @@
+name: Update Thailand GitHub Rank
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # รันดึงอันดับอัตโนมัติทุกเที่ยงคืน
+  workflow_dispatch: # ปุ่มกดสั่งรันเองแบบ Manual
+
+jobs:
+  update-rank:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Fetch Rank from gayanvoice/top-github-users (public_contributions)
+        id: fetch-rank
+        run: |
+          # โหลดไฟล์ public_contributions/thailand.md
+          curl -s https://raw.githubusercontent.com/gayanvoice/top-github-users/main/markdown/public_contributions/thailand.md > thailand.md
+          
+          # สแกนหาคำว่า thammarat-ai
+          RANK_LINE=$(grep -i "thammarat-ai" thailand.md || echo "")
+          
+          if [ -n "$RANK_LINE" ]; then
+            # ดึงตัวเลขอันดับออกมากรองเอาเฉพาะตัวเลข
+            RANK=$(echo "$RANK_LINE" | awk -F'|' '{print $2}' | tr -dc '0-9')
+            echo "Found Rank: $RANK"
+            BADGE="[![Thailand GitHub Rank](https://img.shields.io/badge/Thailand_Rank-%23${RANK}_Public_Contributions-2E90FA?style=for-the-badge&logo=github&logoColor=white)](https://github.com/gayanvoice/top-github-users/blob/main/markdown/public_contributions/thailand.md)"
+          else
+            echo "User not found, fallback badge used"
+            BADGE="[![Thailand GitHub Rank](https://img.shields.io/badge/Thailand_Rank-Top_GitHub_Users-2E90FA?style=for-the-badge&logo=github&logoColor=white)](https://github.com/gayanvoice/top-github-users/blob/main/markdown/public_contributions/thailand.md)"
+          fi
+          
+          echo "BADGE_MD=$BADGE" >> $GITHUB_ENV
+
+      - name: Update README.md
+        run: |
+          python3 -c "
+          import re, os
+          badge = os.environ['BADGE_MD']
+          with open('README.md', 'r') as f:
+              content = f.read()
+          new_content = re.sub(
+              r'<!-- RANK:START -->.*?<!-- RANK:END -->',
+              f'<!-- RANK:START -->\n{badge}\n<!-- RANK:END -->',
+              content,
+              flags=re.DOTALL
+          )
+          with open('README.md', 'w') as f:
+              f.write(new_content)
+          "
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add README.md
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: update Thailand GitHub rank from gayanvoice" && git push)
