@@ -7,8 +7,7 @@
 <br/>
 
 <!-- RANK:START -->
-<!-- GitHub Action จะมาเขียน Badge อันดับจาก gayanvoice ใส่ตรงนี้ให้อัตโนมัติ -->
-[![Thailand GitHub Rank](https://img.shields.io/badge/Thailand_Rank-(Fetching...)-2E90FA?style=for-the-badge&logo=github&logoColor=white)](https://github.com/gayanvoice/top-github-users/blob/main/markdown/total_contributions/thailand.md)
+[![Thailand GitHub Rank](https://img.shields.io/badge/Thailand_Rank-Top_GitHub_Users-2E90FA?style=for-the-badge&logo=github&logoColor=white)](https://github.com/gayanvoice/top-github-users/blob/main/markdown/public_contributions/thailand.md)
 <!-- RANK:END -->
 
 <br/><br/>
@@ -36,7 +35,7 @@
 
 ## 🏆 Achievements & Recognitions
 
-* 🇹🇭 **Top GitHub Developer in Thailand:** Dynamically tracked via [gayanvoice/top-github-users](https://github.com/gayanvoice/top-github-users/blob/main/markdown/total_contributions/thailand.md) (Total Contributions)
+* 🇹🇭 **Top GitHub Developer in Thailand:** Dynamically tracked via [gayanvoice/top-github-users](https://github.com/gayanvoice/top-github-users/blob/main/markdown/public_contributions/thailand.md) (Public Contributions)
 * 🎓 **Academic & Research Impact:** Computer Science & Geoinformatics Lecturer supervising software engineering & cloud infrastructure programs
 
 ---
@@ -50,7 +49,7 @@
 ![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
 ![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=flat-square&logo=pytorch&logoColor=white)
 ![QGIS](https://img.shields.io/badge/QGIS-589632?style=flat-square&logo=qgis&logoColor=white)
-![GDAL](https://img.shields.io/badge/GDAL-000000?style=flat-square&logoColor=white)
+![GDAL](https://img.shields.io/badge/GDAL-000000?style=flat-square&logo=white)
 ![Ollama](https://img.shields.io/badge/Ollama-000000?style=flat-square&logo=ollama&logoColor=white)
 ![Pandas](https://img.shields.io/badge/Pandas-150458?style=flat-square&logo=pandas&logoColor=white)
 
