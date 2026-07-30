@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Fetch Rank from gayanvoice/top-github-users (public_contributions)
         id: fetch-rank
@@ -18,12 +18,12 @@ jobs:
           # โหลดไฟล์ public_contributions/thailand.md
           curl -s https://raw.githubusercontent.com/gayanvoice/top-github-users/main/markdown/public_contributions/thailand.md > thailand.md
           
-          # สแกนหาคำว่า thammarat-ai
+          # สแกนหาบรรทัดที่มี thammarat-ai
           RANK_LINE=$(grep -i "thammarat-ai" thailand.md || echo "")
           
           if [ -n "$RANK_LINE" ]; then
-            # ดึงตัวเลขอันดับออกมากรองเอาเฉพาะตัวเลข
-            RANK=$(echo "$RANK_LINE" | awk -F'|' '{print $2}' | tr -dc '0-9')
+            # สกัดเอาเฉพาะตัวเลขตัวแรกสุดจากบรรทัดนั้น (ซึ่งก็คือตัวเลขอันดับ)
+            RANK=$(echo "$RANK_LINE" | sed -E 's/^[^0-9]*([0-9]+).*/\1/')
             echo "Found Rank: $RANK"
             BADGE="[![Thailand GitHub Rank](https://img.shields.io/badge/Thailand_Rank-%23${RANK}_Public_Contributions-2E90FA?style=for-the-badge&logo=github&logoColor=white)](https://github.com/gayanvoice/top-github-users/blob/main/markdown/public_contributions/thailand.md)"
           else
