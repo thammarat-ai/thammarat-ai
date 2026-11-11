@@ -1,5 +1,9 @@
 # 👋 Hi, I'm Thammarat Thamma.
 
+## คติประจำใจ
+ผมอยู่ในโหมดกำลังพัฒนา ผมวันนี้ต้องเก่งกว่าผมคนเมื่อวาน
+
+
 <div align="center">
 
 ![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1000&color=2E90FA&center=true&vCenter=true&width=550&lines=Computer+Science+%26+Geoinformatics+Lecturer;AI+%2F+GeoAI+%2F+Remote+Sensing+Researcher;Fullstack+Developer+%26+LLM+Architect)
@@ -95,4 +99,3 @@
 
 
 
-5555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
