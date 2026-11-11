@@ -76,12 +76,14 @@
 
 <img src="https://github-readme-stats-fast.vercel.app/api?username=thammarat-ai&show_icons=true&theme=tokyonight&hide_border=true" height="165" />
 <img src="https://github-readme-stats-fast.vercel.app/api/top-langs/?username=thammarat-ai&layout=compact&theme=tokyonight&hide_border=true" height="165" />
-
+</div>
 <br/><br/>
 
-<img src="https://github-readme-activity-graph.vercel.app/graph?username=thammarat-ai&theme=react-dark&hide_border=true" width="100%" />
-
+<div align="center">
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=thammarat-ai&theme=react-dark&hide_border=true" alt="GitHub Streak Stats" />
 </div>
+
+
 
 ---
 
@@ -90,3 +92,7 @@
 💬 *Open for research collaborations, academic exchanges, and technology discussions.*
 
 </div>
+
+
+
+#test test test
