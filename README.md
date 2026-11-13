@@ -84,7 +84,7 @@
 <br/><br/>
 
 <div align="center">
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=thammarat-ai&theme=react-dark&hide_border=true" alt="GitHub Streak Stats" />
+  <img src="https://streak-stats.demolab.com/?user=thammarat-ai&theme=tokyonight&hide_border=true" />
 </div>
 
 
